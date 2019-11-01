@@ -1,4 +1,4 @@
 # for-offer
-ALL FOR OFFER
+ALL FOR OFFER , TOMMOROW IS BETTER
 
 C++
