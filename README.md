@@ -1,5 +1,6 @@
 # for-offer
-ALL FOR OFFER , TOMMOROW IS BETTER
+ALL FOR OFFER , TOMORROW IS BETTER
 
-C++
-Linux
+- C++
+- Linux
+- K8s

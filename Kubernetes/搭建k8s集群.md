@@ -297,7 +297,61 @@ kubectl get pods --all-namespaces
 
 
 
-#### 遇到的问题
+#### 8.部署nginx
+
+```shell
+kubectl create deployment nginx --image=nginx
+# deployment.apps/nginx created
+
+kubectl expose deployment nginx --port=80 --type=NodePort
+# service/nginx exposed
+
+kubectl get pod
+# NAME                     READY   STATUS    RESTARTS   AGE
+# nginx-86c57db685-fr2dt   1/1     Running   0          2m2s
+
+kubectl get svc
+# NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+# kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        12h
+# nginx        NodePort    10.106.44.181   <none>        80:32248/TCP   11s
+
+curl 10.106.44.181:80
+
+```
+
+结果如下，表明部署成功：
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+
+
+#### 9.遇到的问题
 
 ![image-20191120223405712](%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4.assets/image-20191120223405712.png)
 

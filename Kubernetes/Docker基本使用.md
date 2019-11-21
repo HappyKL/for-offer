@@ -58,16 +58,20 @@ docker stop container_id
 docker rm container_id
 
 # 仓库登陆
-
 docker login
 
 # 镜像构建
 docker build -t <your_username>/repo-name:1.0 . # 在当前文件夹下寻找Dockerfile文件
 docker build -t aaaa:1.0 -f dockerfilePath 
+
 # 镜像打tag
 docker tag mysql:5.6 myregistry/mymysql:1.0
 
+# 发布镜像
 docker push myregistry/mymysql:1.0
+
+# 镜像打包
+docker image save nginx:latest >nginx.tar
 ```
 
 
