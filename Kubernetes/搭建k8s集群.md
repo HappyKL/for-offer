@@ -76,7 +76,7 @@ apt-get install -y kubelet kubeadm kubectl --allow-unauthenticated
 #### 3.kubeadm init
 
 ```shell
-kubeadm init --pod-network-cidr=10.244.0.0/16
+kubeadm init # --pod-network-cidr=10.244.0.0/16
 ```
 
 如果可以科学上网，那应该就不会出错，否则报错如下：
@@ -121,7 +121,7 @@ docker tag aiotceo/kube-controller-manager:v1.16.3 k8s.gcr.io/kube-controller-ma
 docker tag aiotceo/kube-apiserver:v1.16.3 k8s.gcr.io/kube-apiserver:v1.16.3
 
 # 然后重新init，即可
-kubeadm init --pod-network-cidr=10.244.0.0/16
+kubeadm init # --pod-network-cidr=10.244.0.0/16
 ```
 
 
@@ -369,3 +369,10 @@ swapoff -a
 journalctl -f -u kubelet.service
 ```
 
+
+
+#### 10.参考链接
+
+ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/ 
+
+ https://www.kubernetes.org.cn/3895.html 
