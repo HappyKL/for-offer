@@ -53,15 +53,8 @@ while(std::cin>>value)  //当使用istream对象作为条件时，其效果是�
 
 # 1.5 类简介
 
-
-
-
-
-
-
-
-
-
-
-
+```shell
+# 输入是文件，输出到文件
+test <infile >outfile
+```
 
