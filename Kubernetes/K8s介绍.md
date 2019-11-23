@@ -14,9 +14,21 @@
 
 
 
-## K8s基本概念
+## K8s重要的资源对象
 
-Master是主服务器
+- Master： API Server，Controller Manager，Scheduler
+
+- Node： kubelet，kube-proxy，docker
+
+  通过以下命令可以查看node信息
+
+  ```shell
+  kubectl describe node node-name
+  ```
+
+  
+
+-  Pod
 
 node是用于部署应用容器的服务器
 

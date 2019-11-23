@@ -8,6 +8,8 @@
 
 
 
+
+
 ## 解决
 
 ```shell
@@ -32,5 +34,5 @@ LC_ALL=zh_CN.UTF-8
 source /etc/environment
 ```
 
-![image-20191119195242277](/Users/kang/likang/note-likang/for-offer/Linux/ssh连接ubuntu后中文显示？？.assets/image-20191119195242277.png)
+![image-20191122142545738](ssh%E8%BF%9E%E6%8E%A5ubuntu%E5%90%8E%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%EF%BC%9F%EF%BC%9F.assets/image-20191122142545738.png)
 
