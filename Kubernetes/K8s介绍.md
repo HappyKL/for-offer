@@ -52,7 +52,7 @@ kubectl describe node node-name
 
 - 网络
 
-  每个Pod都分配了唯一的IP地址，被称为Pod IP，一个Pod里面的多个容器恭喜那个Pod IP地址，K8s要求底层网络支持集群内任意两个Pod之间的TCP/IP直接通信，这通常采用虚拟二层网络技术来实现，例如Flannel等，也就是说，**在K8s中，一个Pod里的容器与另外主机上的Pod容器能够直接通信**。
+  每个Pod都分配了唯一的IP地址，被称为Pod IP，一个Pod里面的多个容器共享那个Pod IP地址，K8s要求底层网络支持集群内任意两个Pod之间的TCP/IP直接通信，这通常采用虚拟二层网络技术来实现，例如Flannel等，也就是说，**在K8s中，一个Pod里的容器与另外主机上的Pod容器能够直接通信**。
 
 - 类型
 
