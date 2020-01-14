@@ -4,7 +4,9 @@
 # 产生公钥
 ssh-keygen -t rsa -C "your_email@youremail.com"
 
-
+# 设置用户名邮箱
+git config --global user.name "xxx"
+git config --global user.email "xxx@163.com"
 ```
 
 
