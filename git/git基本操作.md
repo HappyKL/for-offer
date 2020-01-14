@@ -1,3 +1,16 @@
+# 刚安装git
+
+```shell
+# 产生公钥
+ssh-keygen -t rsa -C "your_email@youremail.com"
+
+
+```
+
+
+
+
+
 # 新建分支并提交到远程
 
 ```shell
