@@ -18,7 +18,7 @@ PRE_ROUTING，INPUT，OUTPUT，FORWARD，POST_ROUTING
 
 iptables和Netfilter的关系：
 
-![image-20191225210026524](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225210026524.png)
+![image-20191225210026524](iptables.assets/image-20191225210026524.png)
 
 # 2.四表+五链(Hook point)+规则
 
@@ -34,7 +34,7 @@ iptables和Netfilter的关系：
 
 - 数据包流向：
 
-![image-20191225210659233](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225210659233.png)
+![image-20191225210659233](iptables.assets/image-20191225210659233.png)
 
 
 
@@ -56,7 +56,7 @@ iptables和Netfilter的关系：
 
 - 四表五链+规则：
 
-![image-20191225211603743](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225211603743.png)
+![image-20191225211603743](iptables.assets/image-20191225211603743.png)
 
 command：
 
@@ -141,11 +141,11 @@ iptables -I INPUT -p tcp -s 10.10.188.233 -dport -80 -j ACCPET
 
   
 
-![image-20191225214815071](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225214815071.png)
+![image-20191225214815071](iptables.assets/image-20191225214815071.png)
 
 
 
-![image-20191225214938736](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225214938736.png)
+![image-20191225214938736](iptables.assets/image-20191225214938736.png)
 
 
 
@@ -190,13 +190,13 @@ iptables -I INPUT -p tcp --dport 50000-60000 -j ACCEPT
 
 - 常见端口
 
-  ![image-20191225220607881](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225220607881.png)
+  ![image-20191225220607881](iptables.assets/image-20191225220607881.png)
 
-  ![image-20191225220630591](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225220630591.png)
+  ![image-20191225220630591](iptables.assets/image-20191225220630591.png)
 
 - 配置规则基本思路
 
-  ![image-20191225220813452](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225220813452.png)
+  ![image-20191225220813452](iptables.assets/image-20191225220813452.png)
 
   
 
@@ -229,11 +229,11 @@ iptables -I INPUT -p tcp --dport 50000-60000 -j ACCEPT
 
   # 5.nat表规则配置
 
-  ![image-20191225222022603](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225222022603.png)
+  ![image-20191225222022603](iptables.assets/image-20191225222022603.png)
 
   
 
-  ![image-20191225222140011](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225222140011.png)
+  ![image-20191225222140011](iptables.assets/image-20191225222140011.png)
   
   ```shell
   # Web Server 10.10.188.173
@@ -255,7 +255,7 @@ iptables -I INPUT -p tcp --dport 50000-60000 -j ACCEPT
 
   
 
-  ![image-20191225223039074](/Users/kang/likang/note-likang/for-offer/Linux/iptables.assets/image-20191225223039074.png)
+  ![image-20191225223039074](iptables.assets/image-20191225223039074.png)
   
   ```shell
   iptables -t nat -F
