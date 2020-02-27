@@ -15,6 +15,18 @@ for (map<int,int>::iterator it=m.begin(); it!=m.end(); ++it)
 
 
 
+# set
+
+```c++
+set<int> a;
+
+a.insert(x);
+a.insert(a.begin()+i,x);
+
+```
+
+
+
 # stack
 
 ```c++
@@ -49,6 +61,9 @@ Q.size();
 ```c++
 vector<int> vec;
 
+vector<int> v(n);
+vector<int> v(n,0);
+
 //添加元素
 vec.push_back(a);//向尾部加元素
 vec.insert(vec.begin()+i,a);//向第i个元素前加元素
@@ -79,5 +94,24 @@ h.pop();
 
 priority_queue<int,vector<int>,greater<int>> min;
 priority_queue<int,vector<int>,less<int>> max;
+```
+
+
+
+# string
+
+```c++
+string s;
+s.append(str)
+s.push_back(char)
+s.erase(start,len)
+s.erase(s.begin(),s.end())
+
+//find找不到返回string::npos
+s.find(str)  
+s.find(char)
+ 
+
+s.substr(start,size); //不是首尾！！！
 ```
 

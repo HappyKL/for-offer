@@ -10,7 +10,7 @@ Netfilter：核心层内部的一个数据包处理模块
 
 
 
-Hook point ：数据包仔netfilter中的挂载点
+Hook point ：数据包在netfilter中的挂载点
 
 PRE_ROUTING，INPUT，OUTPUT，FORWARD，POST_ROUTING
 

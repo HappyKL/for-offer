@@ -1,3 +1,5 @@
+# docker
+
 ## 安装
 
 ```shell
@@ -96,3 +98,28 @@ EXPOSE
 ```
 
 参考网址： https://github.com/solochen84/ph 
+
+
+
+# docker-compose 多容器APP
+
+```shell
+# docker-compose.yaml
+
+build #本地创建对象
+command  #覆盖缺省命令
+depends on  #连接容器
+image  #pull镜像
+ports  # 暴露端口
+volumes # 卷
+
+up  # 启动服务
+stop # 停止服务
+rm # 删除服务中的各个容器
+logs # 观察各个容器的日志
+ps # 列出服务相关的容器
+
+```
+
+
+
