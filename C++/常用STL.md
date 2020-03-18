@@ -69,6 +69,7 @@ vec.push_back(a);//向尾部加元素
 vec.insert(vec.begin()+i,a);//向第i个元素前加元素
 
 //删除元素
+vec.pop_back();
 vec.erase(vec.begin()+i,vec.end()-j);//删除第i个元素至倒数第j个元素
 vec.erase(vec.begin()+i);
 

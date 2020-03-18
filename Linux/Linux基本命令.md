@@ -21,3 +21,19 @@ info ls
 
 ```
 
+## less命令
+
+```shell
+less abc.log
+G # 移动到最后一行
+g # 移动到第一行
+j # 向前移动一行
+k # 向后移动一行
+
+ctrl+f #向前移动一屏
+ctrl+b #向后移动一屏
+ctrl+d #向前移动半屏
+ctrl+u #向后移动半屏
+
+```
+

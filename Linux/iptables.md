@@ -1,3 +1,7 @@
+# iptables
+
+慕课视频
+
 # 1.linux系统下应用层防火墙工具
 
 
@@ -304,4 +308,31 @@ iptables -I INPUT -p tcp --syn -dport 80 -m conlimit --connlimit-above 100 -j RE
 - iptables防CC攻击及实例脚本
 
 
+
+# Trick1 iptables调试
+
+参考地址：https://www.cnblogs.com/EasonJim/p/8413563.html
+
+对ipv4的ICMP包进行追踪调试，抓取所有流经本机的ICMP包
+
+```shell
+iptables -t raw -A OUTPUT -p icmp -j TRACE
+iptables -t raw -A PREROUTING -p icmp -j TRACE
+```
+
+加载对应内核模块
+
+```shell
+modprobe ipt_LOG
+```
+
+调试信息记录在/var/log/kern.log文件
+
+
+
+- 自己测试时：使用的ubuntu 16.04，参考的下面的链接
+
+  https://blog.csdn.net/liukuan73/article/details/78635655
+
+  https://www.cnblogs.com/EasonJim/p/8430127.html
 

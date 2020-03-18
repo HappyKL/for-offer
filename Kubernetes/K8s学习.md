@@ -196,7 +196,7 @@ ipvs（目前正在使用）
 
 ### Ingress
 
-service支持四层，而Ingress支持七层，本质就是通过给负载均衡器自动更新配置文件。比如Ingress-nginx，先安装Ingress-nginx-control，包括deployment和对应的service，通过官网可以进行安装；之后可以配置域名和服务的对应关系通过Ingress资源进行定义；最终可以通过域名（如果没有配DNS，可以在hosts文件里配置域名和IP的对应关系）访问对应服务。
+service支持四层，而Ingress支持七层，本质就是通过给负载均衡器自动更新配置文件。比如Ingress-nginx，先安装Ingress-nginx-control，包括deployment和对应的service，通过官网可以进行安装；之后可以配置域名和服务的对应关系通过Ingress资源的rules字段进行定义；最终可以通过域名（如果没有配DNS，可以在hosts文件里配置域名和IP的对应关系）访问对应服务。
 
 
 
@@ -302,7 +302,9 @@ dig -t A ervice neme.namespace.svc.cluster.local @$(coreosdns.ip)
 
 节点亲和性：标签匹配节点，In，NotIn...
 
-Pod亲和性：Pod亲和性：和指定标签的节点在同一个Node；Pod反亲和性：和指定标签的节点不在同一个Node
+Pod亲和性：和指定标签的节点在同一个Node；
+
+Pod反亲和性：和指定标签的节点不在同一个Node
 
 ### 污点和容忍
 
@@ -370,15 +372,17 @@ kubectl taint nodes nodeName node-role.kubernetes.io/master:PreferNoSchedule
 
 #### 认证策略
 
-Http Token认证
+Http Token认证：通过一个Token来识别合法用户
 
-当客户端发起API调用请求时，需要在HTTP Header里放入Token
+当客户端发起API调用请求时，需要在HTTP Header里放入Token，每一个Token对应一个用户存储在API Server能访问的文件中，从而验证是否合法。
 
-HTTP base认证
+HTTP base认证：通过用户名和密码
 
-放入HTTP Request中的Heather Authorization域里，服务器收到后街吗获取用户名密码
+放入HTTP Request中的Heather Authorization域里，服务器收到后base64解码获取用户名密码，然后验证
 
-目前通常采用的方式：**最严格的HTTPS证书认证**：基于CA根证书签名的客户端身份认证方式 (双向认证方式)
+目前通常采用的方式：**最严格的HTTPS证书认证**：基于CA根证书签名的客户端身份认证方式 (双向认证方式)，客户端服务端均有证书（证书里包含ca加密的公钥）和私钥
+
+![image-20200309150108512](K8s%E5%AD%A6%E4%B9%A0.assets/image-20200309150108512.png)
 
 
 
@@ -428,6 +432,10 @@ ca.crt：根证书，用于Client端验证API server发送的证书
 
 namespace，标识这个service-account-token的作用域空间
 
+#### 总结
+
+![image-20200309151113817](K8s%E5%AD%A6%E4%B9%A0.assets/image-20200309151113817.png)
+
 
 
 ### 鉴权
@@ -440,13 +448,13 @@ namespace，标识这个service-account-token的作用域空间
 
 API Server目前有以下几种鉴权策略，通过API Server的启动参数 -authorization-mode进行设置：
 
-AlwaysDeny
+AlwaysDeny:拒绝所有请求
 
-AlwaysAllow
+AlwaysAllow：允许接受所有请求
 
-ABAC：基于属性
+ABAC：基于属性的访问控制，表示使用用户配置的授权规则对用户请求进行匹配和控制
 
-Webook
+Wehook：通过调用外部REST服务对用户进行授权
 
 **RBAC**（Role-Based Acess Control）基于角色，目前默认策略
 
@@ -542,3 +550,6 @@ limitRange：如果Pod没设置，则使用名称空间下最大的限制，如�
 
 ![image-20200221174413250](K8s%E5%AD%A6%E4%B9%A0.assets/image-20200221174413250.png)
 
+- k8s1.5之后etcd自动形成集群(集群已解决)
+- controller，scheduler表现为主备(集群已解决)
+- 只需要进行apiserver的管理(可以使用nginx+keepalive)
