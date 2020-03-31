@@ -8,6 +8,10 @@ m[1] = 4;
 //判断是否有某个元素
 m.count(key); //如果没有返回0，有返回1
 
+m.erase(key);
+m.erase(iter);
+m.erase(iter s,iter e);
+
 //遍历
 for (map<int,int>::iterator it=m.begin(); it!=m.end(); ++it)
     cout << it->first << " => " << it->second << '\n';
@@ -22,6 +26,10 @@ set<int> a;
 
 a.insert(x);
 a.insert(a.begin()+i,x);
+
+a.erase(x);
+a.erase(iter);
+a.erase(iterator start,iterator end);
 
 ```
 

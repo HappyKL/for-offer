@@ -126,15 +126,25 @@ start和stop模版
 
 
 
-## 5.Pod控制器
+## 5.资源控制器
 
 ### 掌握各种控制器特点以及使用方式
 
 rc，rs，deployment，statefulSet，DameonSet，HPA，Job，CronJob
 
+
+
+Pod的分类
+
+​	自主式Pod：Pod退出了，此类型的Pod不会被创建
+
+​	控制器管理的Pod：在控制器的生命周期里，始终要维持Pod的副本数量
+
+
+
 ### rs
 
-比rc：支持select集合，rc已经弃用
+比rc：支持selector集合(通过lables)，rc已经弃用
 
 rs模版
 
@@ -142,7 +152,7 @@ rs模版
 
 ### Deployment
 
-与RS的区别：支持滚动更新
+提供了声明式定义方法，与RS的区别：支持滚动更新
 
 ![image-20200214171009931](K8s%E5%AD%A6%E4%B9%A0.assets/image-20200214171009931.png)
 
