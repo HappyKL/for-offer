@@ -5,7 +5,6 @@ ALL FOR OFFER , TOMORROW IS BETTER
 - Linux
 - K8s
 - Docker
-- 面试
 - server
 - git
 - 后台开发
