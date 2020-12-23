@@ -30,7 +30,7 @@
 ### 从尾到头打印指针
 
 - 题目描述：从尾到头打印指针
-- 题解：递归打印，先递归后打印
+- 题解：递归打印，先递归后打印 （或栈）
 
 ## 树
 
@@ -104,6 +104,21 @@ bool method(vector<vector<int>>& matrix,int x,int y,vector<vector<int>>& visited
   	3）if(!flag) 
   			进行回溯（还原visited值以及具体问题造成的其他值）
 	return flag
+```
+
+递归回溯思路：
+
+```c++
+void recur(int level, int param){   //经验总结，参数经常有level，max_level，visited，res(判断推出时将结果加入res,不需要存储结果时可以不要该参数，直接退出即可)，cur(当前状态)
+  if(level > MAX_LEVEL){   //退出条件
+    return 
+  }
+  process_curent(level,param); //处理当前层
+  
+  recur(level+1,newParam); //递归下一层
+  
+  Backtrack(level,param); //恢复当前状态 
+}
 ```
 
 ### 机器人的运动范围
@@ -212,6 +227,10 @@ void qSort(vector<int>& nums){
     qSortCore(nums,0,nums.size()-1);
 }
 ```
+
+
+
+
 
 ## 代码的鲁棒性
 

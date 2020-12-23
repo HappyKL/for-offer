@@ -1,0 +1,3 @@
+cookie，服务器设置后写到响应头，客户端保存到浏览器缓存／本地磁盘（服务器会设置失效期）
+
+session，客户端发送用户名密码过去，服务器生成随机串做为key（sessionId），session写入用户名密码；服务器会将sessionid做为cookie发送给客户端保存，客户端下次访问时直接把cookie(sessionid)写入请求头发给服务器，服务器根据sessionid找到相应的信息，这就是淘宝购物车的原理

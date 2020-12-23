@@ -3,6 +3,7 @@
 ## 1.常用函数
 
 ```c++
+//man 2 lseek 可以查看函数描述，都是os API，man 3可以查看C库函数
 open
 read
 write
@@ -10,19 +11,25 @@ lseek
 close
 ```
 
- ## 2.open流程
+```shell
+od -c filename # 字符形式查看文件
+```
+
+
+
+ ## 2.open流程<重要>
 
 - 记录打开文件的消息
   - 程序运行起来后就是一个进程了，os会创建一个task_struct的结构体，记录进程运行时的各种信息，比如所打开文件的相关信息
-  - open将文件成功打开后，在task_struct中又会创建一些结构体，用于记录当前进程目前所打开文件的信息，后续所有的文件操作，都需要依赖于这些信息，其中就包括指向打开文件的文件描述符
-- open函数会申请一段内存空间(内核缓存)，后续读写文件时，用于临时缓存读写文件时的数据
+  - open将文件成功打开后，在task_struct中又会创建一些结构体，用于记录当前进程目前所打开文件的信息，后续所有的文件操作，都需要依赖于这些信息，其中就包括指向打开文件的文件描述符 <文件描述符等信息写入task_struct>
+- open函数(内核函数)会申请一段内存空间(内核缓存)，后续读写文件时，用于临时缓存读写文件时的数据 <开辟内核缓存>
   - 读写数据倒腾流程： write->应用缓存->内核缓存->驱动缓存->文件 
 
 ## 3.open函数1
 
 ```c++
 O_RDONLY
-O_WDWR
+O_RDWR
 O_WRONLY
 
 ```
@@ -46,11 +53,12 @@ O_EXCL //保证每次open打开的是新文件，如果文件已存在，则报�
 当函数出错时，系统会给errno赋予错误号
 
 ```c++
-perror("open file");
+printf("open fail %d \n",errno);
+perror("open fail"); //perror自动将全局变量errno转为对应的错误描述
 // open file : file not exist
 ```
 
-## 6.close,read,write
+## 6.close,read,write<重要>
 
 - close
 
@@ -75,13 +83,13 @@ perror("open file");
 
   与write类似
 
-## 7.标准输入文件
+## 7.标准输入文件<重要>
 
 /dev/stdin 键盘
 
 scanf底层调用read(0,buf,**);
 
-## 8.标准输出和标准错误输出
+## 8.标准输出和标准错误输出<重要>
 
 /dev/stdout 显示器
 
@@ -101,15 +109,16 @@ perror底层调用write(2,buf,..)
   - 每一个进程运行起来都会有一个task_struct存在
   - 文件描述符表被包含在task_struct
   - 进程结束后，进程表会被释放
-- ![image-20200410111201114](%E7%AC%AC1%E7%AB%A0-%E6%96%87%E4%BB%B6IO.assets/image-20200410111201114.png)
+- ![image-20200410111201114](第1章-文件IO.assets/image-20200410111201114.png)
   - 函数指针：read,write等操作文件时，会根据底层具体情况的不同，调用不同的函数来实现读写，所以在V节点里面保存了不同函数的函数指针
   - i节点信息：存储文件属性
+  - 根据文件状态标志比如O_APPEND，使用文件长度设置当前文件位移量；根据文件状态标志比如O_TRUNC，会清空文件，可以设置文件长度为0
 
-## 10.文件共享操作1
+## 10.文件共享操作1<重要>
 
 - 同一进程open两次文件
 
-![image-20200410120626712](%E7%AC%AC1%E7%AB%A0-%E6%96%87%E4%BB%B6IO.assets/image-20200410120626712.png)
+![image-20200410120626712](第1章-文件IO.assets/image-20200410120626712.png)
 
 - 解决相互覆盖：可以设置open状态O_APPEND,从而避免多次操作文件相互覆盖的情况
 
@@ -118,15 +127,15 @@ perror底层调用write(2,buf,..)
   fd2 = open(FILE_NAME,O_RDWR|O_APPEND);
   ```
 
-## 11.文件共享操作2
+## 11.文件共享操作2《重要》
 
-- 多个进程打开同一个文件
+- 多个进程打开同一个文件，open两次
 
-![image-20200410121858666](%E7%AC%AC1%E7%AB%A0-%E6%96%87%E4%BB%B6IO.assets/image-20200410121858666.png)
+![image-20200410121858666](第1章-文件IO.assets/image-20200410121858666.png)
 
 - 解决相互覆盖：同样可以使用O_APPEND
 
-## 12.dup和dup2
+## 12.dup和dup2<重要>
 
 - dup
 
@@ -172,11 +181,11 @@ perror底层调用write(2,buf,..)
 
 - 原理
 
-  ![image-20200410164625077](%E7%AC%AC1%E7%AB%A0-%E6%96%87%E4%BB%B6IO.assets/image-20200410164625077.png)
+  ![image-20200410164625077](第1章-文件IO.assets/image-20200410164625077.png)
 
   多个文件描述符，只有一个文件表，共享文件位移量，因此不会相互覆盖
 
-## 13.dup、dup2实现重定位
+## 13.dup、dup2实现重定位 >《重要》
 
 - 重定位
 
@@ -191,8 +200,10 @@ perror底层调用write(2,buf,..)
   
   //举例:将printf输出到文件而不是屏幕
   fd1 = open(FILE_NAME,O_RDWR|O_TRUNC);
+  
   close(1);
   dup(fd1); //或者dup2(fd1,1);
+  
   printf("hello\n"); //从而输出到file中
   
   ```
@@ -207,7 +218,7 @@ perror底层调用write(2,buf,..)
   ls > file.txt # 底层实现其实就是上面举的例子dup2(fd,1);
   ```
 
-- 总结文件共享
+- **总结文件共享**
 
   - 同一进程多次open
   - 多进程open
@@ -218,7 +229,7 @@ perror底层调用write(2,buf,..)
 ## 14.fcntl函数
 
 ```c++
-fcntl(int fd,int cmd,.../*arg */);
+fcntl(int fd,int cmd,.../*arg */);  //file control
 //fd:文件描述符
 //cmd:控制命令，通过指定不同的宏来修改fd所指向文件的性质
 	//F_DUPFD 模拟dup和dup2

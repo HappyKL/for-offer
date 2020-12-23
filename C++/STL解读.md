@@ -116,11 +116,11 @@ v.capacity();
 
   ![image-20200313165214071](STL%E8%A7%A3%E8%AF%BB.assets/image-20200313165214071.png)
 
-  - map，一个vector，里面存放着指针，因此map本身类型为T** 
+  - **map，一个vector，里面存放着指针，因此map本身类型为T** （最小为8，最大为所需节点数+2，所需节点数为num_elements/buffer_size()+1，buffer_size()为512/size(元素类型)）**
   - 迭代器 自写的类，包含四个成员，T* frist，T* last，T* cur，T** node，分别指向buffer的头，尾，当前，和该buffer在map中的位置
   - 一个deque里面有四个成员，iterator start，iterator finish，map_pointer map，size_type map_size
   - Gun2.9可以指定buffer的元素大小，默认设置是512/size(元素)，如果一个元素大于512字节，那默认buffer的元素为1；G4.9不可以指定，直接使用默认
-  - map这个vector扩充时，会将原有元素搬到中间位置，为了让前后均可以扩增
+  - **map这个vector扩充时，会将原有元素搬到中间位置，为了让前后均可以扩增**
 
 - queue
 
@@ -142,7 +142,7 @@ v.capacity();
 
 - set/mutilset/map/mutilmap底层都是rb_tree
 
-### 容器hashtable
+### 容器hashtable<考点>
 
 - 解决冲突
 
