@@ -37,6 +37,11 @@ helm init # 安装服务器tiller
 helm search  # 搜寻相关chart
 
 
+## install失败报错及解决
+Error: a release named es-exporter already exists.
+Run: helm ls --all es-exporter; to check the status of the release
+Or run: helm del --purge es-exporter; to delete it
+
 ```
 
 
