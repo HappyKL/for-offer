@@ -74,6 +74,9 @@ docker push myregistry/mymysql:1.0
 
 # 镜像打包
 docker image save nginx:latest >nginx.tar
+
+# 删除所有停止的容器
+docker rm `docker ps -a | grep Exited | awk '{print $1}'`
 ```
 
 
