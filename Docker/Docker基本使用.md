@@ -77,6 +77,16 @@ docker image save nginx:latest >nginx.tar
 
 # 删除所有停止的容器
 docker rm `docker ps -a | grep Exited | awk '{print $1}'`
+
+# 自己创建镜像
+# 1.采用dockerfile(提前写好dockerfile)
+docker build -t username/imagename:v1 .
+docker login
+docker push username/imagename:v1
+# 2.将现有启动的容器打包成镜像
+docker commit CONTAINER-ID username/imagename:v1
+docker login
+docker push username/imagename:v1
 ```
 
 
