@@ -255,3 +255,13 @@ git checkout origin/feature # 切换到远程分支
 git checkout -b feature # 给分支命名
 ```
 
+
+
+ 修改远程地址由https为ssh
+
+```bash
+git remote set-url origin git@****.git
+```
+
+
+
